@@ -1,12 +1,12 @@
 <?php
-
+//comment
 session_start();
 
  
 
 function show_accounts($instance_url, $access_token) {
 
-    $query = "SELECT Name, Id from Account LIMIT 100";
+    $query = "SELECT Name, Id, Amount from Opportunity LIMIT 10000";
 
     $url = "$instance_url/services/data/v20.0/query?q=" . urlencode($query);
 
@@ -38,11 +38,12 @@ function show_accounts($instance_url, $access_token) {
 
  
 
-    echo "$total_size record(s) returned<br/><br/>";
+    echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>$total_size record(s) returned</h2></div></div><br/><br/>
+    <div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'><td><h3>ID</h3></td><td align='center'><h3>Name</h3></td><td align='center'><h3>Amount</h3></td></table></div></div>";
 
     foreach ((array) $response['records'] as $record) {
 
-        echo $record['Id'] . ", " . $record['Name'] . "<br/>";
+        echo "<div class='container'><div class='table-responsive'><table class='table'><td>".$record['Id']."</td><td>".$record['Name']."</td><td>$".$record['Amount']."</td></table></div></div>";
 
     }
 
@@ -276,10 +277,12 @@ function delete_account($id, $instance_url, $access_token) {
 <html>
 
     <head>
-
+<!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>REST/OAuth Example</title>
+        <title>rC PHP DMA</title>
 
     </head>
 
@@ -350,7 +353,14 @@ function delete_account($id, $instance_url, $access_token) {
             ?>
 
         </tt>
-
+ <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
     </body>
 
 </html>
