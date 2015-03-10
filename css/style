@@ -1,9 +1,0 @@
-/*!
- * roundCorner v0.4.9 (http://roundcorner.com)
- */
-
-/*Custom CSS */
-
-.td {
-    text-align: center;
-}

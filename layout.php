@@ -6,7 +6,7 @@ session_start();
 
 function show_accounts($instance_url, $access_token) {
 
-    $query = "SELECT Name, Id, Amount from Opportunity LIMIT 250000";
+    $query = "SELECT Name, Id, AnnualRevenue from Account LIMIT 250000";
 
     $url = "$instance_url/services/data/v20.0/query?q=" . urlencode($query);
 
@@ -36,16 +36,14 @@ function show_accounts($instance_url, $access_token) {
 
     $total_size = $response['totalSize'];
 
- 
 
     echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>$total_size record(s) returned</h2></div></div><br/><br/>
-    <div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'><td><h3>ID</h3></td><td align='center'><h3>Name</h3></td><td align='center'><h3>Amount</h3></td>
-    <tr>
-      <td>". $record['Id'] . "</td><td>" , $record['Name'] . "</td><td>" . $record['Amount'] . "</td></tr></table></div></div>";
+    <div class='container'><div class='table-responsive'><table class='table'><tr><td width='33%'><h3>ID</h3></td><td width='33%'><h3>Name</h3></td><td width='33%'><h3>AnnualRevenue</h3></td></tr></table></br>";
+
 
     foreach ((array) $response['records'] as $record) {
 
-        echo "<div class='container'><div class='table-responsive'><table class='table'><td>".$record['Id']."</td><td>".$record['Name']."</td><td>$".$record['Amount']."</td></table></div></div>";
+        echo "<div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'><tr><td width='33%'>".$record['Id']."</td><td width='33%'>".$record['Name']."</td><td width='33%'>$".$record['AnnualRevenue']."</td></tr></table></div></div>";
 
     }
 
