@@ -288,7 +288,7 @@ function delete_account($id, $instance_url, $access_token) {
 
     <body>
 
-        <tt>
+   
 
             <?php
 
@@ -352,7 +352,7 @@ function delete_account($id, $instance_url, $access_token) {
 
             ?>
 
-        </tt>
+    
  <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
