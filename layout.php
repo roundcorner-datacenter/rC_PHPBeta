@@ -117,7 +117,7 @@ if ($lastPage != "1"){
 		
 		foreach ((array) $records as $record) {
 		
-        $theDiv .= "<tr><td width='33%'>".$record['Id']."</td><td width='33%'>".$record['Name']."</td><td width='33%'>$".$record['AnnualRevenue']."</td></tr>";
+        $theDiv .= "<tr><td width='33%'>".$record['Id']."</td><td width='33%'>".$record['Account']."</td><td width='33%'>$".$record['Amount']."</td></tr>";
     }
 		
 		$theDiv .= "</table></div></div>";
