@@ -4,7 +4,7 @@ session_start();
 
 function show_accounts($instance_url, $access_token) {
 	
-		$query = "SELECT rC_Giving__Lifetime_Amount__c, rC_Giving__Current_Active_Date__c, rC_Giving__Account__c FROM Summary";
+		$query = "SELECT Name, Id, Amount FROM Opportunity";
 		
 		$url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
@@ -42,7 +42,7 @@ if ($pn < 1) { // If it is less than 1
 } 
 		$offset = $pn * 10 - 10;
 		
-		$query = "SELECT rC_Giving__Lifetime_Amount__c, rC_Giving__Current_Active_Date__c, rC_Giving__Account__c FROM Summary ORDER BY rC_Giving__Current_Active_Date__c LIMIT 10 OFFSET $offset";
+		$query = "SELECT Name, Id, Amount FROM Opportunity ORDER BY Id LIMIT 10 OFFSET $offset";
 		
 		$url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
@@ -117,13 +117,13 @@ if ($lastPage != "1"){
 		
 		foreach ((array) $records as $record) {
 		
-        $theDiv .= "<tr><td width='33%'>".$record['rC_Giving__Current_Active_Date__c']."</td><td width='33%'>".$record['rC_Giving__Lifetime_Amount__c']."</td><td width='33%'>$".$record['rC_Giving__Account__c']."</td></tr>";
+        $theDiv .= "<tr><td width='33%'>".$record['Id']."</td><td width='33%'>".$record['Name']."</td><td width='33%'>$".$record['Amount']."</td></tr>";
     }
 		
 		$theDiv .= "</table></div></div>";
 	}else{
 		$pn = preg_replace('#[^0-9]#i', '', $_GET['pn']); // filter everything but numbers for security(new)
-    	$query = "SELECT rC_Giving__Lifetime_Amount__c, rC_Giving__Current_Active_Date__c, rC_Giving__Account__c FROM Summary ORDER BY rC_Giving__Current_Active_Date__c LIMIT 10 OFFSET 0";
+    	$query = "SELECT Name, Id, Amount FROM Opportunity ORDER BY Id LIMIT 10 OFFSET 0";
 		$pn = 1;//set page number to 1 
 		
 				//This is where we set how many database items to show on each page 
@@ -215,13 +215,13 @@ if ($lastPage != "1"){
 		
 		foreach ((array) $records as $record) {
 		
-        $theDiv .= "<tr><td width='33%'>".$record['rC_Giving__Current_Active_Date__c']."</td><td width='33%'>".$record['rC_Giving__Lifetime_Amount__c']."</td><td width='33%'>$".$record['rC_Giving__Account__c']."</td></tr>";
+        $theDiv .= "<tr><td width='33%'>".$record['Id']."</td><td width='33%'>".$record['Name']."</td><td width='33%'>$".$record['Amount']."</td></tr>";
     }	
 	$theDiv .= "</table></div></div>";
 	}
 
     echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>Total Number Of Records: $total_size</h2></div></div><br/><br/>
-    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='33%'><h3>ID</h3></td><td width='33%'><h3>Name</h3></td><td width='33%'><h3>Data</h3></td></tr></table>";	
+    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='33%'><h3>ID</h3></td><td width='33%'><h3>Name</h3></td><td width='33%'><h3>Amount</h3></td></tr></table>";	
 	echo $theDiv;
 }
 /*function create_account($name, $instance_url, $access_token) {
