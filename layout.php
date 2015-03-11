@@ -4,7 +4,7 @@ session_start();
 
 function show_accounts($instance_url, $access_token) {
 	
-		$query = "SELECT Name, Id, Amount FROM Summary__c";
+		$query = "SELECT Name, Id, Amount FROM rC_Giving__Summary__c";
 		
 		$url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
@@ -42,7 +42,7 @@ if ($pn < 1) { // If it is less than 1
 } 
 		$offset = $pn * 10 - 10;
 		
-		$query = "SELECT Name, Id, Amount FROM Summary__c ORDER BY Id LIMIT 10 OFFSET $offset";
+		$query = "SELECT Name, Id, Amount FROM rC_Giving__Summary__c ORDER BY Id LIMIT 10 OFFSET $offset";
 		
 		$url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
@@ -123,7 +123,7 @@ if ($lastPage != "1"){
 		$theDiv .= "</table></div></div>";
 	}else{
 		$pn = preg_replace('#[^0-9]#i', '', $_GET['pn']); // filter everything but numbers for security(new)
-    	$query = "SELECT Name, Id, Amount FROM Summary__c ORDER BY Id LIMIT 10 OFFSET 0";
+    	$query = "SELECT Name, Id, Amount FROM rC_Giving__Summary__c ORDER BY Id LIMIT 10 OFFSET 0";
 		$pn = 1;//set page number to 1 
 		
 				//This is where we set how many database items to show on each page 
