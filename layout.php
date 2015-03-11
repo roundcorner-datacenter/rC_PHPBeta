@@ -4,7 +4,7 @@ session_start();
 
 function show_accounts($instance_url, $access_token) {
 	
-		$query = "SELECT Name, Id, AnnualRevenue FROM Account";
+		$query = "SELECT Account, Id, Amount FROM Opportunities";
 		
 		$url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
