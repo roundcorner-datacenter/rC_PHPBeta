@@ -114,11 +114,11 @@ if ($lastPage != "1"){
 //////////////////////////////pagination/////////////////////////////////////////////////////////////////
       
 
-$searchBar = '<form name="search" method="post" action="<?=$PHP_SELF?>"> Seach for: <input type="text" name="find" /> in  <Select NAME="field"> <Option VALUE="fname">First Name</option> <Option VALUE="lname">Last Name</option> <Option VALUE="info">Profile</option> </Select> <input type="hidden" name="searching" value="yes" /> <input type="submit" name="search" value="Search" /> </form>';
+        $searchBar = '<form name="search" method="post" action="<?=$PHP_SELF?>" class="navbar-form navbar-left" role="search"> Seach for: <input type="text" name="find" class="form-control" placeholder="Search"/> in  <Select NAME="field"> <Option VALUE="fname">Object</option> <Option VALUE="lname">Field</option> <Option VALUE="info">Process</option> </Select> <input type="hidden" name="searching" value="yes" /> <input type="submit"class="btn btn-default" name="search" value="Search" /> </form>';
     
-        echo $searchBar;
-        echo $paginationDisplay;
         
+        echo $paginationDisplay;
+        echo $searchBar;
         $theDiv = "<br/><div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'>";
         
         foreach ((array) $records as $record) {
@@ -216,11 +216,11 @@ if ($lastPage != "1"){
 }
 
 //////////////////////////////pagination/////////////////////////////////////////////////////////////////
-        $searchBar = '<form name="search" method="post" action="<?=$PHP_SELF?>"> Seach for: <input type="text" name="find" /> in  <Select NAME="field"> <Option VALUE="fname">First Name</option> <Option VALUE="lname">Last Name</option> <Option VALUE="info">Profile</option> </Select> <input type="hidden" name="searching" value="yes" /> <input type="submit" name="search" value="Search" /> </form>';
+        $searchBar = '<form name="search" method="post" action="<?=$PHP_SELF?>" class="navbar-form navbar-left" role="search"> Seach for: <input type="text" name="find" class="form-control" placeholder="Search"/> in  <Select NAME="field"> <Option VALUE="fname">Object</option> <Option VALUE="lname">Field</option> <Option VALUE="info">Process</option> </Select> <input type="hidden" name="searching" value="yes" /> <input type="submit"class="btn btn-default" name="search" value="Search" /> </form>';
     
-        echo $searchBar;
-        echo $paginationDisplay;
         
+        echo $paginationDisplay;
+        echo $searchBar;
         $theDiv = "<div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table table-condensed table-hover'>";
         
         foreach ((array) $records as $record) {
