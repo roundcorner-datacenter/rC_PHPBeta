@@ -112,7 +112,11 @@ if ($lastPage != "1"){
 }
 
 //////////////////////////////pagination/////////////////////////////////////////////////////////////////
-        
+      
+
+$searchBar = '<form name="search" method="post" action="<?=$PHP_SELF?>"> Seach for: <input type="text" name="find" /> in  <Select NAME="field"> <Option VALUE="fname">First Name</option> <Option VALUE="lname">Last Name</option> <Option VALUE="info">Profile</option> </Select> <input type="hidden" name="searching" value="yes" /> <input type="submit" name="search" value="Search" /> </form>';
+    
+        echo $searchBar;
         echo $paginationDisplay;
         
         $theDiv = "<br/><div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'>";
@@ -212,7 +216,9 @@ if ($lastPage != "1"){
 }
 
 //////////////////////////////pagination/////////////////////////////////////////////////////////////////
-        
+        $searchBar = '<form name="search" method="post" action="<?=$PHP_SELF?>"> Seach for: <input type="text" name="find" /> in  <Select NAME="field"> <Option VALUE="fname">First Name</option> <Option VALUE="lname">Last Name</option> <Option VALUE="info">Profile</option> </Select> <input type="hidden" name="searching" value="yes" /> <input type="submit" name="search" value="Search" /> </form>';
+    
+        echo $searchBar;
         echo $paginationDisplay;
         
         $theDiv = "<div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table table-condensed table-hover'>";
