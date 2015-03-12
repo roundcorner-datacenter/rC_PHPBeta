@@ -4,7 +4,7 @@ session_start();
 
 function show_accounts($instance_url, $access_token) {
     
-        $query = "SELECT Name, Id, rC_Giving__Primary_Giving_Level__c, LastModifiedBy, Owner FROM Account";
+        $query = "SELECT Name, Id, rC_Giving__Primary_Giving_Level__c FROM Account";
         
         $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
@@ -42,7 +42,7 @@ if ($pn < 1) { // If it is less than 1
 } 
         $offset = $pn * 10 - 10;
         
-        $query = "SELECT Name, Id, rC_Giving__Primary_Giving_Level__c, LastModifiedBy, Owner  FROM Account ORDER BY Id LIMIT 10 OFFSET $offset";
+        $query = "SELECT Name, Id, rC_Giving__Primary_Giving_Level__c FROM Account ORDER BY Id LIMIT 10 OFFSET $offset";
         
         $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
 
@@ -123,14 +123,13 @@ if ($lastPage != "1"){
         
         foreach ((array) $records as $record) {
         
-        $theDiv .= "<tr><td width='15%'>".$record['Id']."</td><td width='15%'>".$record['Name']."</td><td width='15%'>".$record['rC_Giving__Primary_Giving_Level__c']."</td>
-        <td width='15%'>".$record['LastModifiedBy']."</td><td width='15%'>".$record['Owner']."</td><td width='15%'><button type='button' class='btn btn-warning'>Edit Record</button></td></tr>";
+        $theDiv .= "<tr><td width='25%'>".$record['Id']."</td><td width='25%'>".$record['Name']."</td><td width='25%'>".$record['rC_Giving__Primary_Giving_Level__c']."</td><td width='25%'><button type='button' class='btn btn-warning'>Edit Record</button></td></tr>";
     }
         
         $theDiv .= "</table></div></div>";
     }else{
         $pn = preg_replace('#[^0-9]#i', '', $_GET['pn']); // filter everything but numbers for security(new)
-        $query = "SELECT Name, Id, rC_Giving__Primary_Giving_Level__c, LastModifiedBy, Owner  FROM Account ORDER BY Id LIMIT 10 OFFSET 0";
+        $query = "SELECT Name, Id, rC_Giving__Primary_Giving_Level__c FROM Account ORDER BY Id LIMIT 10 OFFSET 0";
         $pn = 1;//set page number to 1 
         
                 //This is where we set how many database items to show on each page 
@@ -222,9 +221,8 @@ if ($lastPage != "1"){
         echo $searchBar;
         echo $paginationDisplay;
         
-       $theDiv .= "<tr><td width='15%'>".$record['Id']."</td><td width='15%'>".$record['Name']."</td><td width='15%'>".$record['rC_Giving__Primary_Giving_Level__c']."</td>
-        <td width='15%'>".$record['LastModifiedBy']."</td><td width='15%'>".$record['Owner']."</td><td width='15%'><button type='button' class='btn btn-warning'>Edit Record</button></td></tr>";
-     
+        $theDiv = "<div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table table-condensed table-hover'>";
+        
         foreach ((array) $records as $record) {
         
         $theDiv .= "<tr><td width='25%'>".$record['Id']."</td><td width='25%'>".$record['Name']."</td><td width='25%'>".$record['rC_Giving__Primary_Giving_Level__c']."</td><td width='25%'><button type='button' class='btn btn-warning'>Edit Record</button></td></tr>";
@@ -233,7 +231,7 @@ if ($lastPage != "1"){
     }
 
     echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in Account | Total Number Of Records: $total_size</h2></div></div><br/><br/>
-    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='15%'><h3>ID</h3></td><td width='15%'><h3>Name</h3></td><td width='15%'><h3>rC_Giving__Primary_Giving_Level__c</h3></td><td width='15%'><h3>LastModifiedBy</h3></td><td width='15%'><h3>Owner</h3></td><td width='15%'><h3>Edit Record</h3></td></tr></table>"; 
+    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='25%'><h3>ID</h3></td><td width='25%'><h3>Name</h3></td><td width='25%'><h3>rC_Giving__Primary_Giving_Level__c</h3></td><td width='25%'><h3>Edit Record</h3></td></tr></table>"; 
     echo $theDiv;
 }
 /*function create_account($name, $instance_url, $access_token) {
