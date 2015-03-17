@@ -242,7 +242,7 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
     }   
     $theDiv .= "</table></div></div>";
     }
-    echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in Account | Total Number Of Records: $total_size</h2></div></div><br/><br/>
+    echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in $choice | Total Number Of Records: $total_size</h2></div></div><br/><br/>
     <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='15%'><h3>ID</h3></td><td width='15%'><h3>Name</h3></td><td width='15%'><h3>Giving Primary Giving Level</h3></td>
     <td width='15%'><h3>First Name</h3></td><td width='15%'><h3>Last Name</h3></td><td width='15%'><h3>Edit Record</h3></td></tr></table>"; 
     echo $theDiv;
