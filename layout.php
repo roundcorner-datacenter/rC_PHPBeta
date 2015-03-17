@@ -243,8 +243,8 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
     $theDiv .= "</table></div></div>";
     }
     echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in $choice | Total Number Of Records: $total_size</h2></div></div><br/><br/>
-    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='33%'><h3>$choice1</h3></td><td width='33%'><h3>$choice2</h3></td>
-    <td width='33%'><h3>$choice3</h3></td></tr></table>"; 
+    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='25%'><h3>$choice1</h3></td><td width='25%'><h3>$choice2</h3></td>
+    <td width='25%'><h3>$choice3</h3></td><td width='25%'><h3>Edit Record</h3></td></tr></table>"; 
     echo $theDiv;
 }
 /*function create_account($name, $instance_url, $access_token) {
