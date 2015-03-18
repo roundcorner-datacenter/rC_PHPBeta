@@ -1,39 +1,24 @@
 <?php
+
+if(isset($_POST['rId'])){
+	$id = $_POST['rId'];
+	$choice2 = $_POST['choice2'];
+	$choice3 = $_POST['choice3'];
+}else{
+	header("location: layout.php");
+}
+
+echo "<br><br><div style='content'><div class='row'><div class='col-md-4'></div><div class='col-md-4'><form>
+<div class='form-group'><label for='field1'>$id</label><input type='text' class='form-control' id='field1' placeholder='$choice1'></div>
+<div class='form-group'><label for='field2'>$choice2</label><input type='text' class='form-control' id='$choice2' placeholder='Edit Field'></div>
+<div class='form-group'><label for='field3'>$choice3</label><input type='text' class='form-control' id='$choice3' placeholder='Edit Field'></div>
+</form></div><div class='col-md-4'></div></div></div>";
 //comment yeah
-session_start();
-
-
+/*session_start();
 
 function show_accounts($instance_url, $access_token) {
 
-$choice = "";
 
-if(!isset($_GET['objectChosen'])){
-	$choice = "Opportunity";
-}else{
-	$choice = $_GET['objectChosen'];	
-}
-
-/*if($choice == "Account"){
-	echo "You Chose Account";	
-}else if($choice == "Opportunity"){
-	echo "You Chose Opportunity";
-}else if($choice == "Contact"){
-	echo "You Chose Contact";
-} */ 
-if($choice == "Account"){
-	$choice1 = "Id";
-	$choice2 = "Phone";
-	$choice3 = "Name";
-}else if($choice == "Opportunity"){
-	$choice1 = "Id";
-	$choice2 = "rC_Giving__Current_Giving_Amount__c";
-	$choice3 = "rC_Giving__Expected_Giving_Amount__c";	
-}else if($choice == "Contact"){
-	$choice1 = "Id";
-	$choice2 = "Birthdate";
-	$choice3 = "rC_Giving__Largest_Hard_Credit_Amount__c";
-}
 
         $query = "SELECT $choice1, $choice2, $choice3 FROM $choice";
         
@@ -108,7 +93,7 @@ if ($lastPage != "1"){
 			break;
 		}
 	}
-     //If we are not on the very last page we can place the Next button*/
+     //If we are not on the very last page we can place the Next button
     if ($pn != $lastPage) {
         $nextPage = $pn + 1;
         $paginationDisplay .=  '<li><a href="' . $_SERVER['PHP_SELF'] . '?objectChosen='.$choice.'&pn=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul>
@@ -141,7 +126,7 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
 		}
 		
         $theDiv .= "<tr><td width='25%'>".$record[$choice1]."</td><td width='25%'>".$record[$choice2]."</td><td width='25%'>".$record[$choice3]."</td>
-        <td width='25%'><form name='editRecord' method='post' action='editRecord.php' class='navbar-form navbar-left'><input type='hidden' name='rId' value='$record[$choice1]' /><input type='hidden' name='choice2' value='$record[$choice2]' /><input type='hidden' name='choice3' value='$record[$choice3]' /><input type='submit' class='btn btn-warning' value='Edit Record' /></form></td></tr>";
+        <td width='25%'><button type='button' class='btn btn-warning'>Edit Record</button></td></tr>";
     }
         
         $theDiv .= "</table></div></div>";
@@ -238,16 +223,16 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
 		}
 		
         $theDiv .= "<tr><td width='25%'>".$record[$choice1]."</td><td width='25%'>".$record[$choice2]."</td><td width='25%'>".$record[$choice3]."</td>
-        <td width='25%'><form name='editRecord' method='post' action='editRecord.php' class='navbar-form navbar-left'><input type='hidden' name='rId' value='$record[$choice1]' /><input type='hidden' name='choice2' value='$record[$choice2]' /><input type='hidden' name='choice3' value='$record[$choice3]' /><input type='submit' class='btn btn-warning' value='Edit Record' /></form></td></tr>";
+        <td width='25%'><button type='button' class='btn btn-warning'>Edit Record</button></td></tr>";
     }   
     $theDiv .= "</table></div></div>";
     }
-    echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in $choice | Total Number Of Records: $total_size</h2></div></div><br/><br/>
-    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='25%'><h3>$choice1</h3></td><td width='25%'><h3>$choice2</h3></td>
-    <td width='25%'><h3>$choice3</h3></td><td width='25%'><h3>Edit Record</h3></td></tr></table>"; 
+    echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in Account | Total Number Of Records: $total_size</h2></div></div><br/><br/>
+    <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='15%'><h3>ID</h3></td><td width='15%'><h3>Name</h3></td><td width='15%'><h3>Giving Primary Giving Level</h3></td>
+    <td width='15%'><h3>First Name</h3></td><td width='15%'><h3>Last Name</h3></td><td width='15%'><h3>Edit Record</h3></td></tr></table>"; 
     echo $theDiv;
 }
-/*function create_account($name, $instance_url, $access_token) {
+function create_account($name, $instance_url, $access_token) {
     $url = "$instance_url/services/data/v20.0/sobjects/Account/";
  
     $content = json_encode(array("Name" => $name));
@@ -374,7 +359,7 @@ function delete_account($id, $instance_url, $access_token) {
     <body>
 
             <?php
-            $access_token = $_SESSION['access_token'];
+            /*$access_token = $_SESSION['access_token'];
             $instance_url = $_SESSION['instance_url'];
  
             if (!isset($access_token) || $access_token == "") {
