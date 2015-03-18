@@ -8,11 +8,20 @@ if(isset($_POST['rId'])){
 	header("location: layout.php");
 }
 
-echo "<br><br><div style='content'><div class='row'><div class='col-md-4'></div><div class='col-md-4'><form>
-<div class='form-group'><label for='field1'>$id</label><input type='text' class='form-control' id='field1' placeholder='$choice1'></div>
-<div class='form-group'><label for='field2'>$choice2</label><input type='text' class='form-control' id='$choice2' placeholder='Edit Field'></div>
-<div class='form-group'><label for='field3'>$choice3</label><input type='text' class='form-control' id='$choice3' placeholder='Edit Field'></div>
-</form></div><div class='col-md-4'></div></div></div>";
+echo "<br><br><div class='container-fluid'><div class='bg-primary' align='center'><h2>Data Here</h2></div></div><br/>
+<div class='container'><div class='row'><div class='col-md-4'>
+<button onclick='goBack()' type='button' class='btn btn-success btn-lg'>Go Back</button>
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+</div>
+<div class='col-md-4'><form>
+<div class='form-group'><label for='field1'>$id</label><input type='text' class='form-control' id='field1' placeholder='$id'></div>
+<div class='form-group'><label for='field2'>$choice2</label><input type='text' class='form-control' id='$choice2' placeholder='$choice2'></div>
+<div class='form-group'><label for='field3'>$choice3</label><input type='text' class='form-control' id='$choice3' placeholder='$choice3'></div>
+<button type='button' class='btn btn-warning btn-lg'>Submit</button></form></div><div class='col-md-4'></div></div></div>";
 //comment yeah
 /*session_start();
 
