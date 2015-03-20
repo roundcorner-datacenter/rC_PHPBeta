@@ -2,51 +2,48 @@
 //comment yeah
 session_start();
 
+
 function show_accounts($instance_url, $access_token) {
+
+include_once ("db/connect_to_mysql.php");
 
 $choice = "";
 $pn = "";
 
 if(!isset($_GET['objectChosen'])){
-	$choice = "Opportunity";
+	$choice = "rC_Opportunity";
 	$pn = 1;
 }else{
 	$choice = $_GET['objectChosen'];	
 }
 
-/*if($choice == "Account"){
-	echo "You Chose Account";	
-}else if($choice == "Opportunity"){
-	echo "You Chose Opportunity";
-}else if($choice == "Contact"){
-	echo "You Chose Contact";
-} */ 
-if($choice == "Account"){
-	$choice1 = "Id";
-	$choice2 = "Phone";
-	$choice3 = "Name";
-    $choice4 = "rC_Bios__Acquired_Date__c";
-    $choice5 = "rC_Giving__Lifetime_Hard_Credit_Amount__c";
-    $choice6 = "rC_Giving__Lifetime_Soft_Credit_Amount__c";
-}else if($choice == "Opportunity"){
-	$choice1 = "Id";
-	$choice2 = "rC_Giving__Giving_Type__c";
-	$choice3 = "rC_Giving__Calculated_Giving_Type__c";	
-    $choice4 = "rC_Giving__Affiliation__c";
-    $choice5 = "rC_Giving__Giving_Type_Engine__c";
-    $choice6 = "rC_Giving__Close_Date_Time__c";
-}else if($choice == "Contact"){
-    $choice1 = "Id";
-    $choice2 = "Birthdate";
-    $choice3 = "rC_Giving__Largest_Hard_Credit_Amount__c";
-    $choice4 = "rC_Bios__Age__c";
-    $choice5 = "rC_Bios__Birth_Year__c";
-    $choice6 = "rC_Bios__Gender__c";
+if($choice == "rC_Account"){
+	$choice1 = "sF_Id";
+	$choice2 = "sF_Phone";
+	$choice3 = "sF_Name";
+    $choice4 = "sF_rC_Bios__Acquired_Date__c";
+    $choice5 = "sF_rC_Giving__Lifetime_Hard_Credit_Amount__c";
+    $choice6 = "sF_rC_Giving__Lifetime_Soft_Credit_Amount__c";
+}else if($choice == "rC_Opportunity"){
+	$choice1 = "sF_Id";
+	$choice2 = "sF_rC_Giving__Giving_Type__c";
+	$choice3 = "sF_rC_Giving__Calculated_Giving_Type__c";	
+    $choice4 = "sF_rC_Giving__Affiliation__c";
+    $choice5 = "sF_rC_Giving__Giving_Type_Engine__c";
+    $choice6 = "sF_rC_Giving__Close_Date_Time__c";
+}else if($choice == "rC_Contact"){
+    $choice1 = "sF_rC_Id";
+    $choice2 = "sF_Birthdate";
+    $choice3 = "sF_rC_Giving__Largest_Hard_Credit_Amount__c";
+    $choice4 = "sF_rC_Bios__Age__c";
+    $choice5 = "sF_rC_Bios__Birth_Year__c";
+    $choice6 = "sF_rC_Bios__Gender__c";
 }
 
-        $query = "SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice";
+        //$query = "SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice";
+		$sqlCommand = "SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice ORDER BY $choice1 LIMIT 10 OFFSET $offset";
         
-        $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
+        $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($sqlCommand);
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -55,7 +52,7 @@ if($choice == "Account"){
         $json_response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($json_response, true);
-        $total_size = $response['totalSize'];   
+        //$total_size = $response['totalSize'];   
     
     if(isset($_GET['pn']) || ($pn = 1) && ($choice)){
         $pn = preg_replace('#[^0-9]#i', '', $_GET['pn']); // filter everything but numbers for security(new)
@@ -71,9 +68,40 @@ if ($pn < 1) { // If it is less than 1
 } 
         $offset = $pn * 10 - 10;
         
-        $query = "SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice ORDER BY $choice1 LIMIT 10 OFFSET $offset";
+        $sqlCommand = "SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice ORDER BY $choice1 LIMIT 10 OFFSET $offset";
+		
+	$query = mysql_query($sqlCommand) or die (mysql_error());
+	$num_rows = mysql_num_rows($query);
+	
+	if ($num_rows > 0) {
+		$theDiv = "<br/><div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'>";
+		// get all the video details
+		while($row = mysql_fetch_array($query)){ 
+			 $choice1 = $row[$choice1];
+			 $choice2 = $row[$choice2];
+			 $choice3 = $row[$choice3];
+			 $choice4 = $row[$choice4];
+			 $choice5 = $row[$choice5];
+			 $choice6 = $row[$choice6];		 
+         }
+		  $theDiv .= "<tr><td width='14%'>".$choice1."</td><td width='14%'>".$choice2."</td><td width='14%'>".$choice3."</td>
+        <td width='14%'>".$choice4."</td><td width='14%'>".$choice5."</td><td width='14%'>".$choice6."</td>
+        <td width='14%'>
+        <form name='editRecord' method='post' action='editRecord.php' class='navbar-form navbar-left'><input type='hidden' name='rId' value='$choice1' /><input type='hidden' name='choice2' value='$choice2' /><input type='hidden' name='choice3' value='$choice3' />
+        <input type='hidden' name='choice4' value='$choice4' /><input type='hidden' name='choice5' value='$choice5' /><input type='hidden' name='choice6' value='$choice6' />
+		<input type='hidden' name='fieldName1' value='$choice1' />
+		<input type='hidden' name='fieldName2' value='$choice2' />
+		<input type='hidden' name='fieldName3' value='$choice3' />
+		<input type='hidden' name='fieldName4' value='$choice4' />
+		<input type='hidden' name='fieldName5' value='$choice5' />
+		<input type='hidden' name='fieldName6' value='$choice6' />
+		<input type='hidden' name='tblName' value='$choice' />
+        <input type='submit' class='btn btn-warning' value='Edit Record' /></form></td></tr>";
         
-        $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
+        $theDiv .= "</table></div></div>";
+	}
+        
+        /*$url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -83,7 +111,7 @@ if ($pn < 1) { // If it is less than 1
         curl_close($curl);
         $response = json_decode($json_response, true);
     
-        $records = $response['records'];
+        $records = $response['records'];*/
 		
 		
 		        
@@ -134,35 +162,33 @@ if ($lastPage != "1"){
 $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="navbar-form navbar-left" role="search">Seach for: <input type="text" name="find" class="form-control" placeholder="Search"/> in  <Select name="objectChosen"><Option value="Opportunity">Opportunity</option><Option value="Contact">Contact</option><Option value="Account">Account</option> </Select><input type="hidden" value="yes" /><input type="hidden" name="pn" value="1" /><input type="submit" class="btn btn-default" value="Search" /></form>';
         
         echo $searchBar;
-        
-        $theDiv = "<br/><div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'>";
-        
-        foreach ((array) $records as $record) {
-			
-		if($record[$choice1] == is_null){
-			$record[$choice1] = "nothin";
-		}
-		if($record[$choice2] == is_null){
-			$record[$choice2] = "nothin";
-		}
-		if($record[$choice3] == is_null){
-			$record[$choice3] = "nothin";
-		}
-        if($record[$choice4] == is_null){
-            $record[$choice4] = "nothin";
-        }
-        if($record[$choice5] == is_null){
-            $record[$choice5] = "nothin";
-        }
-        if($record[$choice6] == is_null){
-            $record[$choice6] = "nothin";
-        }
+		echo $paginationDisplay;
+/////////////////////////////else if pn is not set/////////////////////////////////////////////////
+    }else{
+        $pn = preg_replace('#[^0-9]#i', '', $_GET['pn']); // filter everything but numbers for security(new)
+        $pn = 1;//set page number to 1
 		
-        $theDiv .= "<tr><td width='14%'>".$record[$choice1]."</td><td width='14%'>".$record[$choice2]."</td><td width='14%'>".$record[$choice3]."</td>
-        <td width='14%'>".$record[$choice4]."</td><td width='14%'>".$record[$choice5]."</td><td width='14%'>".$record[$choice6]."</td>
+		$sqlCommand = "SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice ORDER BY $choice1 LIMIT 10 OFFSET $offset";
+		
+	$query = mysql_query($sqlCommand) or die (mysql_error());
+	$num_rows = mysql_num_rows($query);
+	
+	if ($num_rows > 0) {
+		$theDiv = "<br/><div class='container'><div class='table-responsive'><table class='table table-condensed table-hover'>";
+		// get all the video details
+		while($row = mysql_fetch_array($query)){ 
+			 $choice1 = $row[$choice1];
+			 $choice2 = $row[$choice2];
+			 $choice3 = $row[$choice3];
+			 $choice4 = $row[$choice4];
+			 $choice5 = $row[$choice5];
+			 $choice6 = $row[$choice6];		 
+         }
+		  $theDiv .= "<tr><td width='14%'>".$choice1."</td><td width='14%'>".$choice2."</td><td width='14%'>".$choice3."</td>
+        <td width='14%'>".$choice4."</td><td width='14%'>".$choice5."</td><td width='14%'>".$choice6."</td>
         <td width='14%'>
-        <form name='editRecord' method='post' action='editRecord.php' class='navbar-form navbar-left'><input type='hidden' name='rId' value='$record[$choice1]' /><input type='hidden' name='choice2' value='$record[$choice2]' /><input type='hidden' name='choice3' value='$record[$choice3]' />
-        <input type='hidden' name='choice4' value='$record[$choice4]' /><input type='hidden' name='choice5' value='$record[$choice5]' /><input type='hidden' name='choice6' value='$record[$choice6]' />
+        <form name='editRecord' method='post' action='editRecord.php' class='navbar-form navbar-left'><input type='hidden' name='rId' value='$choice1' /><input type='hidden' name='choice2' value='$choice2' /><input type='hidden' name='choice3' value='$choice3' />
+        <input type='hidden' name='choice4' value='$choice4' /><input type='hidden' name='choice5' value='$choice5' /><input type='hidden' name='choice6' value='$choice6' />
 		<input type='hidden' name='fieldName1' value='$choice1' />
 		<input type='hidden' name='fieldName2' value='$choice2' />
 		<input type='hidden' name='fieldName3' value='$choice3' />
@@ -171,14 +197,9 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
 		<input type='hidden' name='fieldName6' value='$choice6' />
 		<input type='hidden' name='tblName' value='$choice' />
         <input type='submit' class='btn btn-warning' value='Edit Record' /></form></td></tr>";
-    }
         
         $theDiv .= "</table></div></div>";
-		echo $paginationDisplay;
-    }else{
-        $pn = preg_replace('#[^0-9]#i', '', $_GET['pn']); // filter everything but numbers for security(new)
-        $query = "SELECT SELECT $choice1, $choice2, $choice3, $choice4, $choice5, $choice6 FROM $choice ORDER BY $choice1 LIMIT 10 OFFSET 0";
-        $pn = 1;//set page number to 1 
+	}
         
 //This is where we set how many database items to show on each page 
 $itemsPerPage = 10; 
@@ -191,7 +212,7 @@ if ($pn < 1) { // If it is less than 1
     $pn = $lastPage; // force it to be $lastpage's value
 } 
         
-        $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($query);
+        $url = "$instance_url/services/data/v33.0/query?q=" . urlencode($sqlCommand);
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -202,7 +223,7 @@ if ($pn < 1) { // If it is less than 1
         $response = json_decode($json_response, true);
         //$total_size = $response['totalSize'];
     
-        $records = $response['records'];
+        //$records = $response['records'];
         
         //////Adam's Pagination Display Setup /////////////////////////////////////////////////////////////////////
 $paginationDisplay = ""; // Initialize the pagination output variable
@@ -252,37 +273,7 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
         echo $searchBar;
         echo $paginationDisplay;
         
-        $theDiv = "<div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table table-condensed table-hover'>";
-        
-        foreach ((array) $records as $record) {
-			
-		if($record[$choice1] == is_null){
-			$record[$choice1] = "nothin";
-		}
-		if($record[$choice2] == is_null){
-			$record[$choice2] = "nothin";
-		}
-		if($record[$choice3] == is_null){
-			$record[$choice3] = "nothin";
-		}
-        if($record[$choice4] == is_null){
-            $record[$choice4] = "nothin";
-        }
-        if($record[$choice5] == is_null){
-            $record[$choice5] = "nothin";
-        }
-        if($record[$choice6] == is_null){
-            $record[$choice6] = "nothin";
-        }
-		
-        $theDiv .= "<tr><td width='14%'>".$record[$choice1]."</td><td width='14%'>".$record[$choice2]."</td><td width='14%'>".$record[$choice3]."</td>
-        <td width='14%'>".$record[$choice4]."</td><td width='14%'>".$record[$choice5]."</td><td width='14%'>".$record[$choice6]."</td>
-        <td width='14%'><form name='editRecord' method='post' action='editRecord.php' class='navbar-form navbar-left'><input type='hidden' name='rId' value='$record[$choice1]' />
-        <input type='hidden' name='choice2' value='$record[$choice2]' /><input type='hidden' name='choice3' value='$record[$choice3]' /><input type='hidden' name='choice4' value='$record[$choice4]' />
-        <input type='hidden' name='choice5' value='$record[$choice5]' /><input type='hidden' name='choice6' value='$record[$choice6]' />
-		<input type='hidden' name='tblName' value='$choice' /><input type='submit' class='btn btn-warning' value='Edit Record' /></form></td></tr>";
-    }   
-    $theDiv .= "</table></div></div>";
+       
     }
     echo "<div class='container-fluid'><div class='bg-primary' align='center'><h2>You are in $choice | Total Number Of Records: $total_size</h2></div></div><br/><br/>
     <div class='container'><div class='table-responsive' style='overflow: hidden;'><table class='table'><tr><td width='14%'><h3>$choice1</h3></td><td width='14%'><h3>$choice2</h3></td>
@@ -290,114 +281,7 @@ $searchBar = '<form method="get" action="'. $_SERVER['PHP_SELF'] . '" class="nav
     <td width='14%'><h3>$choice6</h3></td><td width='14%'><h3>Edit Record</h3></td></tr></table>"; 
     echo $theDiv;
 }
-/*function create_account($name, $instance_url, $access_token) {
-    $url = "$instance_url/services/data/v20.0/sobjects/Account/";
- 
-    $content = json_encode(array("Name" => $name));
- 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER,
-            array("Authorization: OAuth $access_token",
-                "Content-type: application/json"));
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
- 
-    $json_response = curl_exec($curl);
- 
-    $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
- 
-    if ( $status != 201 ) {
-        die("Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
-    }
-     
-    echo "HTTP status $status creating account<br/><br/>";
- 
-    curl_close($curl);
- 
-    $response = json_decode($json_response, true);
- 
-    $id = $response["id"];
- 
-    echo "New record id $id<br/><br/>";
- 
-    return $id;
-}
-function show_account($id, $instance_url, $access_token) {
-    $url = "$instance_url/services/data/v20.0/sobjects/Account/$id";
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER,
-            array("Authorization: OAuth $access_token"));
- 
-    $json_response = curl_exec($curl);
- 
-    $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
- 
-    if ( $status != 200 ) {
-        die("Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
-    }
- 
-    echo "HTTP status $status reading account<br/><br/>";
- 
-    curl_close($curl);
- 
-    $response = json_decode($json_response, true);
-    foreach ((array) $response as $key => $value) {
-echo "$key:$value<br/>";
-    }
-    echo "<br/>";
-}
- 
-function update_account($id, $new_name, $city, $instance_url, $access_token) {
-    $url = "$instance_url/services/data/v20.0/sobjects/Account/$id";
- 
-    $content = json_encode(array("Name" => $new_name, "BillingCity" => $city));
- 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    curl_setopt($curl, CURLOPT_HTTPHEADER,
-            array("Authorization: OAuth $access_token",
-                "Content-type: application/json"));
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PATCH");
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
- 
-    curl_exec($curl);
- 
-    $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
- 
-    if ( $status != 204 ) {
-        die("Error: call to URL $url failed with status $status, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
-    }
- 
-    echo "HTTP status $status updating account<br/><br/>";
- 
-    curl_close($curl);
-}
- 
-function delete_account($id, $instance_url, $access_token) {
-    $url = "$instance_url/services/data/v20.0/sobjects/Account/$id";
- 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    curl_setopt($curl, CURLOPT_HTTPHEADER,
-            array("Authorization: OAuth $access_token"));
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
- 
-    curl_exec($curl);
- 
-    $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
- 
-    if ( $status != 204 ) {
-        die("Error: call to URL $url failed with status $status, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
-    }
- 
-    echo "HTTP status $status deleting account<br/><br/>";
- 
-    curl_close($curl);
-}*/
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -416,37 +300,7 @@ function delete_account($id, $instance_url, $access_token) {
 
     <body>
 
-            <?php
-            $access_token = $_SESSION['access_token'];
-            $instance_url = $_SESSION['instance_url'];
- 
-            if (!isset($access_token) || $access_token == "") {
-                die("Error - access token missing from session!");
-            }
- 
-            if (!isset($instance_url) || $instance_url == "") {
-                die("Error - instance URL missing from session!");
-            }
- 
-            show_accounts($instance_url, $access_token);
- 
-            /*$id = create_account("My New Org", $instance_url, $access_token);
- 
-            show_account($id, $instance_url, $access_token);
- 
-            show_accounts($instance_url, $access_token);
- 
-            update_account($id, "My New Org, Inc", "San Francisco",
-                    $instance_url, $access_token);
- 
-            show_account($id, $instance_url, $access_token);
- 
-            show_accounts($instance_url, $access_token);
- 
-            delete_account($id, $instance_url, $access_token);
- 
-            show_accounts($instance_url, $access_token);*/
-            ?>
+           <?php echo $theDiv; ?>
 
 
 

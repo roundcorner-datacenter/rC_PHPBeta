@@ -17,15 +17,18 @@ if(isset($_POST['id'])){
 	$fieldName4 = 'sF_' . $_POST['fieldName4'];
 	$fieldName5 = 'sF_' . $_POST['fieldName5'];
 	$fieldName6 = 'sF_' . $_POST['fieldName6'];
+	$tblName = 'rC_' . $_POST['tblName'];
+	
+	//cho $dbname;
 	
 	//echo $id . ', '. $choice2 . ', ' . $choice3 . ', ' . $choice4 . ', ' . $choice5 . ', ' . $choice6 . '<br/>';
 	//echo $fieldName1 . ', '. $fieldName2 . ', ' . $fieldName3 . ', ' . $fieldName4 . ', ' . $fieldName5 . ', ' . $fieldName6;
 	
 
-$sql = "INSERT INTO $dbname ($fieldName1,$fieldName2,$fieldName3,$fieldName4,$fieldName5,$fieldName6) VALUES ('$id','$choice2','$choice3','$choice4','$choice5','$choice6')";
+$sql = "INSERT INTO $tblName ($fieldName1,$fieldName2,$fieldName3,$fieldName4,$fieldName5,$fieldName6) VALUES ('$id','$choice2','$choice3','$choice4','$choice5','$choice6')";
 
 if ($conn->query($sql) === TRUE) {
-    $msg = "New record created successfully";
+    $msg = "New record created successfully <a href='layout.php'>Click Here</a> to go back";
 } else {
     $msg = "Error: " . $sql . "<br>" . $conn->error;
 }
