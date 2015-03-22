@@ -192,7 +192,7 @@ function show_accounts($instance_url, $access_token, $object)
    
     echo "
     <div class='bg-primary' align='center'>
-    <h3>Total Number Of Records: $total_size</h3>
+    <h3>You are working in $object | Total Number Of Records: $total_size</h3>
     </div>
     <br/><br/>
     <div class='table-responsive' style='overflow: hidden;'>
