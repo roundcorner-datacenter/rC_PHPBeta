@@ -232,12 +232,10 @@ function show_accounts($instance_url, $access_token, $object)
    <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-            <div class="list-group">
-  <a href="#" class="list-group-item active">
-    <h4 class="list-group-item-heading">DMCS</h4>
-    <p class="list-group-item-text">rC Data Migration and Calculator System</p>
-    <p class="list-group-item-text">Version 0.5.3</p>
-  </a>
+            <div class="panel panel-primary">
+    <div class="panel-body">DMCS</div>
+     <div class="panel-footer">rC Data Migration and Calculator System</div>
+     <div class="panel-footer">Version 0.5.3</div>
 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="/layout.php?object=Opportunity"><i class="fa fa-home fa-fw"></i>Opportunity</a></li>
