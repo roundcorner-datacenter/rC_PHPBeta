@@ -233,7 +233,7 @@ function show_accounts($instance_url, $access_token, $object)
         <div class="row">
             <div class="col-md-2">
             <div class="panel panel-primary">
-    <div class="panel-heading">DMCS</div>
+    <div class="panel-heading"><h1>DMCS</h1></div>
      <div class="panel-body">rC Data Migration and Calculator System</div>
      <div class="panel-footer">Version 0.5.3</div>
 </div>
