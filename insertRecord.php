@@ -11,13 +11,14 @@ if(isset($_POST['id'])){
     $choice4 = $_POST['choice4'];
     $choice5 = $_POST['choice5'];
     $choice6 = $_POST['choice6'];
+    $ipaddress = $_SERVER['REMOTE_ADDR'];
 	$fieldName1 = 'sF_' . $_POST['fieldName1'];
 	$fieldName2 = 'sF_' . $_POST['fieldName2'];
 	$fieldName3 = 'sF_' . $_POST['fieldName3'];
 	$fieldName4 = 'sF_' . $_POST['fieldName4'];
 	$fieldName5 = 'sF_' . $_POST['fieldName5'];
 	$fieldName6 = 'sF_' . $_POST['fieldName6'];
-	$ipaddress = getenv('REMOTE_ADDR');
+	$ipaddress = 'sF_' . $_SERVER['REMOTE_ADDR'];
 	$tblName = 'rC_' . $_POST['tblName'];
 	
 	//cho $dbname;
