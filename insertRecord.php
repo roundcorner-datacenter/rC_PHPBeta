@@ -18,14 +18,14 @@ if(isset($_POST['id'])){
 	$fieldName5 = 'sF_' . $_POST['fieldName5'];
 	$fieldName6 = 'sF_' . $_POST['fieldName6'];
 	$tblName = 'rC_' . $_POST['tblName'];
-	
+	$ipaddress = getenv('REMOTE_ADDR');
 	//cho $dbname;
 	
 	//echo $id . ', '. $choice2 . ', ' . $choice3 . ', ' . $choice4 . ', ' . $choice5 . ', ' . $choice6 . '<br/>';
 	//echo $fieldName1 . ', '. $fieldName2 . ', ' . $fieldName3 . ', ' . $fieldName4 . ', ' . $fieldName5 . ', ' . $fieldName6;
 	
 
-$sql = "INSERT INTO $tblName ($fieldName1,$fieldName2,$fieldName3,$fieldName4,$fieldName5,$fieldName6) VALUES ('$id','$choice2','$choice3','$choice4','$choice5','$choice6')";
+$sql = "INSERT INTO $tblName ($fieldName1,$fieldName2,$fieldName3,$fieldName4,$fieldName5,$fieldName6,$ipaddress) VALUES ('$id','$choice2','$choice3','$choice4','$choice5','$choice6','$ipaddress')";
 
 if ($conn->query($sql) === TRUE) {
     $msg = "New record created in the DCoE Database successfully! <a href='adminer123.php' class='btn btn-info'>View and Edit Record Here</a> or <a href='layout.php' class='btn btn-info'>Click Here</a> to go back";
