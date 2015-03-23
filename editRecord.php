@@ -13,7 +13,6 @@ if(isset($_POST['rId'])){
 	$fieldName4 = $_POST['fieldName4'];
 	$fieldName5 = $_POST['fieldName5'];
 	$fieldName6 = $_POST['fieldName6'];
-	$ipaddress = getenv('REMOTE_ADDR');
 	$tblName = $_POST['tblName'];
 
 }else{

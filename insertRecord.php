@@ -18,7 +18,6 @@ if(isset($_POST['id'])){
 	$fieldName4 = 'sF_' . $_POST['fieldName4'];
 	$fieldName5 = 'sF_' . $_POST['fieldName5'];
 	$fieldName6 = 'sF_' . $_POST['fieldName6'];
-	$ipaddress = 'sF_' . $_SERVER['REMOTE_ADDR'];
 	$tblName = 'rC_' . $_POST['tblName'];
 	
 	//cho $dbname;
