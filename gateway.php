@@ -54,7 +54,7 @@ if (!isset($instance_url) || $instance_url == "") {
             </div>
             <div class="col-md-12 well">
                 Welcome to the rC-DMCS. Please give us a second to change. 
-                <a href="layout.php">Data Migration</a>
+                <a href="layout.php"><img src="img/db1.png" class="img-responsive" alt="Responsive image"></a>
             </div>
         </div>
     </div>
