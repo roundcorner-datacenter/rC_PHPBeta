@@ -50,9 +50,11 @@ if (!isset($instance_url) || $instance_url == "") {
             </div>
             <div class="col-md-3"></div>
             <div class="col-md-3">
-                <a href="layout.php"><img src="img/db1.png" class="img-responsive" alt="Responsive image"></a>
+                <a href="layout.php">Data Migration</a>
             </div>
-            <div class="col-md-3">Calculator</div>
+            <div class="col-md-3">
+            <a href="#">Calculator</a>
+            </div>
             <div class="col-md-3"></div>
         </div>
     </div>
