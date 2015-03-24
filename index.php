@@ -26,8 +26,9 @@ include_once ("functions.php");
     </head>
 <body>
 <div class="container">
-
-<h1>DMA PHP App</h1>
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4"><h1>DMA PHP App</h1>
 <img src="img/beta.png" alt="Beta" class="img-rounded"><br>
 <h2>Please sign into Salesforce</h2>
 <?php flash('error'); ?>
@@ -40,10 +41,10 @@ include_once ("functions.php");
     } else {
         document.write("<a href=\"oauth.php\" class=\"btn btn-primary btn-lg\">Sign In</a>");
     }
-</script>
+</script></div>
+<div class="col-md-4"></div>
 
-
-
+</div>
     </div> <!-- /container -->
 </body>
 
