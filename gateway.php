@@ -46,15 +46,15 @@ if (!isset($instance_url) || $instance_url == "") {
                 
             </div><div class="col-md-4"></div>
             <div class="col-md-12 well">
-                        <div align="center">Welcome to the rC-DMCS. Please give us a second to change.</div> 
+                        <p class="text-center">Welcome to the rC-DMCS. Please give us a second to change.</p> 
             </div>
             <div class="col-md-12">
             <div class="col-md-3"></div>
             <div class="col-md-3">
-                 <div align="center"><a href="layout.php">Data Migration</a></div>
+                <p class="text-center"><a href="layout.php">Data Migration</a></p>
             </div>
             <div class="col-md-3">
-            <div align="center"> <a href="#">Calculator</a></div>
+            <p class="text-center"> <a href="#">Calculator</a></p>
             </div>
             <div class="col-md-3"></div>
             </div>
