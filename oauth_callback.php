@@ -99,6 +99,6 @@ $_SESSION['instance_url'] = $instance_url;
 
  
 
-header( 'Location: layout.php' ) ;
+header( 'Location: gateway.php' ) ;
 
 ?>
