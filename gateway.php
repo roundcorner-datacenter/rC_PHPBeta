@@ -46,19 +46,14 @@ if (!isset($instance_url) || $instance_url == "") {
                 
             </div><div class="col-md-4"></div>
             <div class="col-md-12 well">
-                <form method="get" action="' . $_SERVER['PHP_SELF'] . '" class="navbar-form navbar-left" role="search">
-                    Seach for: <input type="text" name="find" class="form-control" placeholder="Search"/>
-                    <input type="hidden" name="pn" value="1" />
-                    <input type="submit" class="btn btn-default" value="Search" />
-                </form>            
+                        <span align="center">Welcome to the rC-DMCS. Please give us a second to change.</span> 
             </div>
-            <div class="col-md-3 well"></div>
-            <div class="col-md-3 well">
-                Welcome to the rC-DMCS. Please give us a second to change. 
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
                 <a href="layout.php"><img src="img/db1.png" class="img-responsive" alt="Responsive image"></a>
             </div>
-            <div class="col-md-3 well">Cal</div>
-            <div class="col-md-3 well"></div>
+            <div class="col-md-3">Calculator</div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 
