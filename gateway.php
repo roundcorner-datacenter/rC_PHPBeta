@@ -52,10 +52,13 @@ if (!isset($instance_url) || $instance_url == "") {
                     <input type="submit" class="btn btn-default" value="Search" />
                 </form>            
             </div>
-            <div class="col-md-12 well">
+            <div class="col-md-3 well"></div>
+            <div class="col-md-3 well">
                 Welcome to the rC-DMCS. Please give us a second to change. 
                 <a href="layout.php"><img src="img/db1.png" class="img-responsive" alt="Responsive image"></a>
             </div>
+            <div class="col-md-3 well">Cal</div>
+            <div class="col-md-3 well"></div>
         </div>
     </div>
 
