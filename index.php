@@ -28,9 +28,10 @@ include_once ("functions.php");
 <div class="container">
 <div class="row">
 <div class="col-md-4"></div>
-<div class="col-md-4"><h1>DMA PHP App</h1>
+<div class="col-md-4"><h1>rC-DMCS</h1>
 <img src="img/beta.png" alt="Beta" class="img-rounded"><br>
-<h2>Please sign into Salesforce</h2>
+<h3>roundCorner Data Migration and Calculator System</h3>
+<h4>Log into SalesForce to gain access to the rC-DMCS Gateway</h4>
 <?php flash('error'); ?>
 
 
