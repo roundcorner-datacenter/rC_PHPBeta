@@ -241,7 +241,7 @@ function show_accounts($instance_url, $access_token, $object)
                     <li class="active"><a href="/layout.php?object=Opportunity"><i class="fa fa-home fa-fw"></i>Opportunity</a></li>
                     <li><a href="/layout.php?object=Contact"><i class="fa fa-file-o fa-fw"></i>Contact</a></li>
                     <li><a href="/layout.php?object=Account"><i class="fa fa-bar-chart-o fa-fw"></i>Account</a></li>
-                    <li><a href="?/logout.php"><i class="fa fa-table fa-fw"></i>Logout</a></li>
+                    <li><a href="gateway.php"><i class="fa fa-table fa-fw"></i>Gateway</a></li>
                 </ul>
             </div>
             <div class="col-md-10 well">
