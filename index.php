@@ -10,16 +10,8 @@ include_once ("functions.php");
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>rC PHP DMA</title>
+<title>rC-DMCS</title>
 
-</head>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
-
-    <head>
-    <title>rC PHP DMA</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
