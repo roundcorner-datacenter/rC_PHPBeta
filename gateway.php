@@ -39,7 +39,7 @@ if (!isset($instance_url) || $instance_url == "") {
         <div class="col-md-4"></div>
             <div class="col-md-4">
             <div class="panel panel-primary">
-    <div class="panel-heading"><h1>rC-DMCS</h1></div>
+    <div class="panel-heading"> <p class="text-center"><h1>rC-DMCS</h1></p></div>
      <div class="panel-body">roundCorner Data Migration Calculator System</div>
      <div class="panel-footer">Version 0.5.3</div>
 </div>
