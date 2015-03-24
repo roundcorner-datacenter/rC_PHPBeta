@@ -183,7 +183,7 @@ function show_accounts($instance_url, $access_token, $object)
             <input type='hidden' name='fieldName5' value='$field5' />
             <input type='hidden' name='fieldName6' value='$field6' />
             <input type='hidden' name='tblName' value='$object' />
-            <input type='submit' class='btn btn-warning' value='Edit Record' /></form>
+            <input type='submit' class='btn btn-primary' value='Edit Record' /></form>
             </td>
             </tr>";
         }
